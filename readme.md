@@ -1,58 +1,87 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+*****************************************************
+****     Projet Laravel: École du numérique		*****
+*****************************************************
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Ce nouveau projet portera sur les crypto-monnaie (crypto-currencies). L'année 2017 a vu une forte hausse des quotations de celles-ci en général.
+Explication simplifiée: Le principe des crypto-monnaie lancé par le créateur du bitcoin est l'existance de comptes que l'on peut créer à volonté sur un réseau et qui eux se partagent toutes les crypto-devises existantes:
+Par exemple (avec des chiffres petits) si 15 bitcoin existent et que 3 comptes détiennent ces bicoins de façon égale, alors on peut dire que un compte détient 5 bitcoins chacun.
+Chaque compte est identifié par un code spéficique généré à travers d'un hashing (clé public + clé privée).
+ATTENTION TOUJOURS POUR SIMPLIFIER: La clé public vous permet de recevoir des cryptos, et la clé privée c'est celle qui vous permet de transférer des fonds. Donc c'est ok d'afficher publiquement la clé public mais il faut garder en secret la clé privé et ce pour chaque compte.
 
-## About Laravel
+pour être concret vous aurez un quelque chose comme:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Clé public (et donc numero de compte)		valeur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+125FjkLP3KEtmgSdeo9TdpeWatJadaMroU        	5.00000000
+1PL48qxYa42ctvAniY2FLRiumuAxVamDuK			5.00000000
+1PoZ8dFbS8HFy22zZPTGBbNUQeG3VuhmTr			5.00000000
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+à gauche ce sont les clés publiques répresentent des compte et à droite le nombre de devises divisable au 10^(-8).
 
-## Learning Laravel
+les clé privées sont utilisés pour crypter les messages passés sur le "réseau". Ces transactions sont affichées dans une liste qui est organisé par block. C'est ce qu'on appel la blockchain. Cette chaine est partagé par un réseau peer to peer (similaire au protocol des torrents et Kazaa ceci évolue au fur et à mesure).
+Ceci est codé en C++ ici https://github.com/bitcoin .
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+Si jamais on a une transaction alors un code le message avec la clé privée et le network le décode avec la clé publique.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+Donc pour simplifier nous allons ignorer la clé privée et juste utiliser la clé publique comme numéro de compte.On va partir du principe que le réseau n'existe que sur notre plateforme individuelle. Donc créer des compte avec un hash aléatoire c'est tout par exemple.
 
-## Laravel Sponsors
+$compte = sha1(rand());
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+Si jamais le premier compte 125FjkLP3KEtmgSdeo9TdpeWatJadaMroU décide de transférer un bitcoin au troisième 1PoZ8dFbS8HFy22zZPTGBbNUQeG3VuhmTr. alors nous aurons une transaction
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+Transactions compte sender 	              			compte receiver							amount
+1			 125FjkLP3KEtmgSdeo9TdpeWatJadaMroU  	1PL48qxYa42ctvAniY2FLRiumuAxVamDuK		1.00000000
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+*** CAHIER DES CHARGES ***
 
-## Security Vulnerabilities
+Avant tout crééz un repository EcoleDuNumCoin et incluez les formateurs dans votre projet.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1)Donc on va créer la possibilités aux utilisateurs de pouvoir se logger, délogger, de créer un profil
+2)de créer plusieurs compte bitcoin(Oui un utilisateur peut avoir plusieurs comptes).
+3)On va laisser la possibiliter de virer des cryptos d'un compte à un autre (sans frais pour faire simple à moins que vous soyez chaud).
+Attention ici il s'agit bien de transaction un compte ne peut être débité s'il n'a pas le solde suffisant.
+Attention 2: Si une transaction est crédité dans un compte il faut qu'il soit débité dans l'autre. Pour
+cela il faut utiliser une transaction SQL.
 
-## License
+4)Faites de même pour la deuxième monnaie plus importante: l'Etherium.
+5)De convertir les crypto devises en dollars pour simplifier.
+Vous pouvez utiliser la API de coinmarketcap.com voici la page:
+https://api.coinmarketcap.com/v1/ticker/bitcoin/
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+pour receuillir les données faites
+
+<?php
+
+$jsonData = json_decode(file_get_contents('https://api.coinmarketcap.com/v1/ticker/bitcoin/'));
+
+?>
+
+documentation : 
+
+Ceci vous donnera le prix: price_usd
+
+1 compte peut avoir plusieurs adresses,
+une adresse correspond a une cryptomonnaie
+
+table 1 user :	
+	- id
+	- name
+	- password
+	- email
+	- accountNumber
+
+table 2 adress :
+	- id
+	- accountNumber
+	- adressNumber
+	- crypto_id
+	- sum
+
+table 3 cryptomonaies
+	- id
+	- name
+	- description
+
+
+
