@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
 		// $this->call(UsersTableSeeder::class);
 		$this->call(UsersSeeder::class);
+		$this->call(CryptoCoinsSeeder::class);
 		// $this->call(AdressSeeder::class);
-		// $this->call(CryptoCoinsSeeder::class);
     }
 }

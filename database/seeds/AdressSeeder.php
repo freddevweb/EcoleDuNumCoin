@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
+use App\CryptoCoin;
 
 class AdressSeeder extends Seeder
 {
@@ -12,11 +14,26 @@ class AdressSeeder extends Seeder
     public function run()
     {
 
+		$users = $this->User->all();
+		$cyptos = $this->CryptoCoin->all();
 
-		\App\Adress::create(array(
 
-		));
-		
-		
+
+		foreach( $users as $user ){
+
+			foreach( $cryptos as $crypto ){
+
+				$addressNumber = substr( hash('sha256', $user->name.$crypto->name.time() ) ,0 ,30 );
+
+				$sum = rand(100000000, 1000000000 )/100000000;
+
+				\App\Adress::create(array(
+					'account' => $user->account,
+					'adressNumber' => $addressNumber,
+					'cryptoId' => $crypto->id,
+					'sum' => $sum,
+				));
+			}
+		}
     }
 }

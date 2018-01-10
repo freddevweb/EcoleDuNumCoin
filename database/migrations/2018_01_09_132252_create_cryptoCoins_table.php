@@ -17,6 +17,7 @@ class CreateCryptoCoinsTable extends Migration
 			$table->increments('id');
 			$table->string('name');
 			$table->string('describe');
+			$table->string('abbreviation');
             $table->timestamps();
         });
     }
