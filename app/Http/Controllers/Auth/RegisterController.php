@@ -104,19 +104,19 @@ class RegisterController extends Controller
 	{
 		$rand = rand( 0, 3 );
 		if( $rand == 0 ){
-			$accountKey = $rand.$user->name.$user->email;
+			$accountKey = substr( hash('sha256',$rand.$value.$email), 0, 10 );
 		}
 		else if( $rand == 1 ){
-			$accountKey = $user->name.$user->email.$rand;
+			$accountKey = substr( hash('sha256',$value.$email.$rand), 0, 10 );
 		}
 		else if( $rand == 2 ){
-			$accountKey = $user->name.$rand.$user->email;
+			$accountKey = substr( hash('sha256',$value.$rand.$email), 0, 10 );
 		}
 		else if( $rand == 3 ){
-			$accountKey = $rand.$user->email.$user->name;
+			$accountKey = substr( hash('sha256',$rand.$email.$value), 0, 10 );
 		}
 
-		return hash('sha256', $accountKey );
+		return $accountKey;
 	}
 
 }
