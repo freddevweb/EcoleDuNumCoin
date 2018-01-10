@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CryptoCoinsSeeder extends Seeder
+class CryptocoinSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class CryptoCoinsSeeder extends Seeder
 		];
 
 		foreach( $coins as $coin ){
-			App\CryptoCoin::create(array(
+			App\Cryptocoin::create(array(
 				'name' => $coin['name'],
 				'describe' => $coin['describe'],
 				'abbreviation' => $coin['abbreviation'],

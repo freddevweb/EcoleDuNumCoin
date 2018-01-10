@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
-use App\CryptoCoin;
+use Illuminate\Support\Facades\DB;
 
 class AdressSeeder extends Seeder
 {
@@ -14,8 +13,8 @@ class AdressSeeder extends Seeder
     public function run()
     {
 
-		$users = $this->User->all();
-		$cyptos = $this->CryptoCoin->all();
+		$users = DB::table('users')->get();
+		$cryptos = DB::table('cryptocoins')->get();
 
 
 

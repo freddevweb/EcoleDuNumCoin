@@ -23,16 +23,16 @@ class UsersSeeder extends Seeder
 
 			$rand = rand( 0, 3 );
 			if( $rand == 0 ){
-				$accountKey = substr( hash('sha256',$rand.$value.$email), 0, 10 );
+				$accountKey = substr( hash('sha256',$rand.$value.$email.time()), 0, 30 );
 			}
 			else if( $rand == 1 ){
-				$accountKey = substr( hash('sha256',$value.$email.$rand), 0, 10 );
+				$accountKey = substr( hash('sha256',$value.$email.$rand.time()), 0, 30 );
 			}
 			else if( $rand == 2 ){
-				$accountKey = substr( hash('sha256',$value.$rand.$email), 0, 10 );
+				$accountKey = substr( hash('sha256',$value.$rand.$email.time()), 0, 30 );
 			}
 			else if( $rand == 3 ){
-				$accountKey = substr( hash('sha256',$rand.$email.$value), 0, 10 );
+				$accountKey = substr( hash('sha256',$rand.$email.$value.time()), 0, 30 );
 			}
 
 			\App\User::create(array(

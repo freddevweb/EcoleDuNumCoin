@@ -24,3 +24,8 @@ Route::get('/documentations', array(
 	'uses'=>'Controller@documentation'
 ));
 
+Route::get('/tests', array(
+	'as' => 'tests',
+	'uses' => 'Controller@tests'
+));
+

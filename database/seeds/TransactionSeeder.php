@@ -1,26 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class Controller extends BaseController
+
+class TransactionSeeder extends Seeder
 {
-	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-	
-	public function documentation()
-	{
-		return view("docs");
-	}
-
-
-	public function tests(){
-
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
 		$addresses = DB::table('adresses')->get();
 
 		for($i = 0; $i <= 4; $i++){
@@ -55,7 +47,7 @@ class Controller extends BaseController
 	
 				$sum = rand(100,9999999)/10000000;
 				
-				dump (array(
+				App\Transaction::create (array(
 					'from' => $address->adressNumber,
 					'to' => $to->adressNumber,
 					'sum' => $sum ,
@@ -64,12 +56,5 @@ class Controller extends BaseController
 			}
 
 		}
-		
-		die();
-	}
-
-
-
-	
+    }
 }
-

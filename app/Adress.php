@@ -15,5 +15,10 @@ class Adress extends Model
     public function cryptocoin()
     {
         return $this->belongsTo('App\CryptoCoin');
-    }
+	}
+	
+	public function historical()
+	{
+		return $this->hasMany('App\Historical');
+	}
 }
