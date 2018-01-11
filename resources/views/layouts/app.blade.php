@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+	
 </head>
 <body>
     <div id="app">
@@ -53,13 +54,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+									@include('nav')
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
-
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
@@ -77,5 +78,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.js') }}"></script>
+	<script src="{{ asset('js/main.js')}}"></script>
 </body>
 </html>

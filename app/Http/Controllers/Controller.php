@@ -21,7 +21,7 @@ class Controller extends BaseController
 		return view("docs");
 	}
 
-	public function allCoins( $convert = null )
+	public function allCoins()
 	{
 		$query = new Apihttp;
 		$query->coin = !empty( $coin ) ? $coin : "" ;
@@ -29,21 +29,23 @@ class Controller extends BaseController
 		$url = $query->urlConstruct();
 
 		$request = new Client();
-		$response = $request->get( $url )->getBody();
-		echo $response;
+		$response = json_decode( $request->get( $url )->getBody() );
+		// dump($response);
+		// die();
+		return view('coinsView', [ 'response' => $response] );
 	}
 
-	public function coin( $coin, $convert = null ){
+	public function coin( $coin ){
 		
 		$query = new Apihttp;
 		$query->coin = $coin ;
-		$query->params = !empty( $params ) ? $params : "";
 		$url = $query->urlConstruct();
 
 		$request = new Client();
-		$response = $request->get( $url )->getBody();
-		echo $response;
-
+		$response = json_decode( $request->get( $url )->getBody() );
+		dump( $response ) ;
+		die();
+		return view('coinView', [ 'response' => $response[0]] );
 	}
 
 

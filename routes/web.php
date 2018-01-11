@@ -24,8 +24,42 @@ Route::get('/documentations', array(
 	'uses'=>'Controller@documentation'
 ));
 
-Route::get('/tests/{convert?}', array(
+Route::get('/tests', array(
 	'as' => 'tests',
 	'uses' => 'Controller@allCoins'
 ));
 
+Route::get('/coin/{coin}', array(
+	'as' => 'coin',
+	'uses' => 'Controller@coin'
+));
+
+Route::get('/userProfile', array(
+	'as'=>'profile',
+	'uses' => 'UserController@getProfile'
+))->middleware('auth');
+
+Route::get('/dashboard', array(
+	'as'=>'dashboard',
+	'uses'=>'UserController@getDashboard'
+))->middleware('auth');
+
+Route::get('/comptes', array(
+	'as'=>'comptes',
+	'uses'=>'UserController@getDashboard'
+))->middleware('auth');
+
+Route::get('/seeAllTransactions', array(
+	'as'=>'seeAllTransactions',
+	'uses'=>'UserController@seeAllTransactions'
+))->middleware('auth');
+
+Route::get('/seeMyTransactions', array(
+	'as'=>'seeMyTransactions',
+	'uses'=>'UserController@seeMyTransactions'
+))->middleware('auth');
+
+Route::get('/doTransaction', array(
+	'as'=>'doTransaction',
+	'uses'=>'UserController@doTransaction'
+))->middleware('auth');

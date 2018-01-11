@@ -10,14 +10,15 @@ class UserController extends Controller
 	public function getProfile( User $user )
 	{
 		//
+		
 	}
 
-	public function getTransactions( User $user )
+	public function doTransactions( User $user )
 	{
 		//
 	}
 
-	public function createTransaction( User $user )
+	public function seeMyTransaction()
 	{
 		//
 	}
@@ -26,5 +27,6 @@ class UserController extends Controller
 	{
 		//
 	}
+
 
 }
