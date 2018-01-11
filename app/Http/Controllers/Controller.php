@@ -6,8 +6,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
 use Illuminate\Support\Facades\DB;
+
+use GuzzleHttp\Client;
+
+use App\Classes\Apihttp;
 
 class Controller extends BaseController
 {
@@ -18,55 +21,55 @@ class Controller extends BaseController
 		return view("docs");
 	}
 
+	public function allCoins( $convert = null )
+	{
+		$query = new Apihttp;
+		$query->coin = !empty( $coin ) ? $coin : "" ;
+		$query->params["convert"] = !empty( $convert ) ? $convert : "";
+		$url = $query->urlConstruct();
+
+		$request = new Client();
+		$response = $request->get( $url )->getBody();
+		echo $response;
+	}
+
+	public function coin( $coin, $convert = null ){
+		
+		$query = new Apihttp;
+		$query->coin = $coin ;
+		$query->params = !empty( $params ) ? $params : "";
+		$url = $query->urlConstruct();
+
+		$request = new Client();
+		$response = $request->get( $url )->getBody();
+		echo $response;
+
+	}
+
 
 	public function tests(){
 
-		$addresses = DB::table('adresses')->get();
 
-		for($i = 0; $i <= 4; $i++){
+		$query = new Apihttp;
+		// $query->coin = "bitcoin";
+		$query->params = array(
+			'convert' => "EUR",
+		);
+		$url = $query->urlConstruct();
 
-			foreach( $addresses as $address ){
-			
-				$arrayTo = DB::table('adresses')
-					->where('cryptoId', $address->cryptoId)
-					->where('adressNumber', '<>' , $address->adressNumber)
-					->get();
-	
-				$to = $arrayTo[ rand(0, count($arrayTo)-1 )];
-				
-				$bitcoinDatas = [
-					"price_usd" => "573.137",
-					"price_btc" => "1.0",
-					"last_updated" => "1472762067"
-				];
-	
-				$ethDatas = [
-					"price_usd" => "12.1844",
-					"price_btc" => "0.021262",
-					"last_updated"=> "1472762062"
-				];
-	
-				if( $address->cryptoId == 1 ){
-					$price = json_encode( $bitcoinDatas );
-				}
-				else if( $address->cryptoId == 2 ){
-					$price = json_encode( $ethDatas );
-				}
-	
-				$sum = rand(100,9999999)/10000000;
-				
-				dump (array(
-					'from' => $address->adressNumber,
-					'to' => $to->adressNumber,
-					'sum' => $sum ,
-					'prices' => $price,
-				));
-			}
+		$request = new Client();
+		$res = $request->get( $url );
 
-		}
-		
+		dump( $res->getStatusCode() );
+		dump( $res->getBody() ); 
+
+		echo $res->getStatusCode();
+		echo "<br/>";
+		echo( $res->getBody() );
+
 		die();
 	}
+
 
 
 

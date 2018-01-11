@@ -54,7 +54,6 @@ class TransactionSeeder extends Seeder
 					'prices' => $price,
 				));
 			}
-
 		}
     }
 }

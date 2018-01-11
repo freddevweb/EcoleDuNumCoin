@@ -24,8 +24,8 @@ Route::get('/documentations', array(
 	'uses'=>'Controller@documentation'
 ));
 
-Route::get('/tests', array(
+Route::get('/tests/{convert?}', array(
 	'as' => 'tests',
-	'uses' => 'Controller@tests'
+	'uses' => 'Controller@allCoins'
 ));
 
