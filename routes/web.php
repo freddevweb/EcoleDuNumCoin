@@ -34,20 +34,41 @@ Route::get('/coin/{coin}', array(
 	'uses' => 'Controller@coin'
 ));
 
-Route::get('/userProfile', array(
-	'as'=>'profile',
-	'uses' => 'UserController@getProfile'
-))->middleware('auth');
+/***
+ * if connected
+ * ***/
 
 Route::get('/dashboard', array(
 	'as'=>'dashboard',
 	'uses'=>'UserController@getDashboard'
 ))->middleware('auth');
 
+// account
+
+Route::get('/userProfile', array(
+	'as'=>'profile',
+	'uses' => 'UserController@getProfile'
+))->middleware('auth');
+
+
+// addresses
+
 Route::get('/comptes', array(
 	'as'=>'comptes',
-	'uses'=>'UserController@getDashboard'
+	'uses'=>'UserController@getAddresses'
 ))->middleware('auth');
+
+Route::get('/address/{address}', array(
+	'as' => 'address',
+	'uses'=> "UserController@getAddress"
+));
+
+Route::get('/addressCreate', array(
+	'as' => 'creer-adresse',
+	'uses' =>'UserController@createAddress'
+));
+
+// transactions
 
 Route::get('/seeAllTransactions', array(
 	'as'=>'seeAllTransactions',

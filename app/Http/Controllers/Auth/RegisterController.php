@@ -63,11 +63,30 @@ class RegisterController extends Controller
      */
     protected function create(Array $data)
     {
+
+		$accountKey = null;
+
+		$rand = rand( 0, 3 );
+		if( $rand == 0 ){
+			$accountKey = substr( hash('sha256',$rand.$data['email'].$data['name']), 0, 30 );
+		}
+		else if( $rand == 1 ){
+			$accountKey = substr( hash('sha256',$data['email'].$rand.$data['name']), 0, 30 );
+		}
+		else if( $rand == 2 ){
+			$accountKey = substr( hash('sha256',$data['name'].$rand.$data['email']), 0, 30 );
+		}
+		else if( $rand == 3 ){
+			$accountKey = substr( hash('sha256',$rand.$data['email'].$data['name']), 0, 30 );
+		}
+
+		// $accountKey = $this->generateAccount( $data );
+		// dump($accountKey);die();
 		return User::create([
             'name' => $data['name'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
-			'account' => $this->generateAccount( $data )
+			'account' => $accountKey,
 		]);
 	}
 	
@@ -75,16 +94,16 @@ class RegisterController extends Controller
 	{
 		$rand = rand( 0, 3 );
 		if( $rand == 0 ){
-			$accountKey = substr( hash('sha256',$rand.$data['email'].$data['name']), 0, 10 );
+			$accountKey = substr( hash('sha256',$rand.$data['email'].$data['name']), 0, 30 );
 		}
 		else if( $rand == 1 ){
-			$accountKey = substr( hash('sha256',$data['email'].$rand.$data['name']), 0, 10 );
+			$accountKey = substr( hash('sha256',$data['email'].$rand.$data['name']), 0, 30 );
 		}
 		else if( $rand == 2 ){
-			$accountKey = substr( hash('sha256',$data['name'].$rand.$data['email']), 0, 10 );
+			$accountKey = substr( hash('sha256',$data['name'].$rand.$data['email']), 0, 30 );
 		}
 		else if( $rand == 3 ){
-			$accountKey = substr( hash('sha256',$rand.$data['email'].$data['name']), 0, 10 );
+			$accountKey = substr( hash('sha256',$rand.$data['email'].$data['name']), 0, 30 );
 		}
 
 		return $accountKey;

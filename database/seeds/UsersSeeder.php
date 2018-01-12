@@ -38,7 +38,7 @@ class UsersSeeder extends Seeder
 			\App\User::create(array(
 				'name' => $value,
 				'email' => $email,
-				'password' => bcrypt( $password.$password ),
+				'password' => bcrypt( $password ),
 				'account' =>  $accountKey,
 			));
 		}

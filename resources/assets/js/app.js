@@ -18,6 +18,11 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+// Vue.component('address-component',require('./components/courtcoin.vue'))
+
 const app = new Vue({
     el: '#app'
 });
+
+
+

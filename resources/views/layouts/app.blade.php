@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-	
+	<script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 <body>
     <div id="app">
@@ -78,7 +78,5 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-	<script src="{{ asset('js/bootstrap.js') }}"></script>
-	<script src="{{ asset('js/main.js')}}"></script>
 </body>
 </html>
