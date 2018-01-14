@@ -1,0 +1,21 @@
+/************** COMMENTAIRES *************/
+
+Salut Fred,
+
+bravo pour ton site crypto qui ressemble au moins à quelque chose.
+Les migrations et seeders marchent nickel.
+
+Il faut évidemment faire les méthodes qui n'existent pas encore suivant si on appuie sur les boutons: My, All, Do
+
+Je vois que tu es en train de construire la page address pour faire l'appel et convertir en USD.
+
+Continue comme ça. Tout se passera bien. Je repète il faut continuer à cravacher et pas s'arrêter.
+J'espère que ce que tu vois en ce moment te servira pour ton stage symfony. Il y a des similarités mais également
+pas mal de changement comme tu peux voir dans le tuto que tu es en train de faire. C'est un bon tuto essaie d'aller jusqu'au bout. Sinon pendant le stage on te coachera.
+
+Merci pour le sérieux et le travail fourni pendant la formation. Crois moi ça se cumule et on s'en rend compte après quand
+on est en train de se prendre la tête dans un projet.
+
+On se boira une bière quand je repasse sur Perpi.
+
+Bonne chance mec!
